@@ -1,6 +1,6 @@
 const express = require("express");
-const router = express.Router();
 const posts = require("../data/posts");
+const router = express.Router();
 
 //TODO: INDEX
 router.get("/", (req, res) => {
@@ -11,15 +11,15 @@ router.get("/", (req, res) => {
 //TODO: SHOW
 router.get("/:id", (req, res) => {
   const id = parseInt(req.params.id);
-  const post = posts.find(p => p.id === id);
-  console.log(post)
+  const post = posts.find((p) => p.id === id);
+  console.log(post);
   if (!post) {
     return res.status(404).json({
-      error:"Not Found",
-      message:"Post not found" 
-    })
+      error: "Not Found",
+      message: "Post not found",
+    });
   }
-  res.json(post)
+  res.json(post);
 });
 
 //TODO: STORE
@@ -43,20 +43,20 @@ router.patch("/:id", (req, res) => {
 //TODO: DESTROY
 router.delete("/:id", (req, res) => {
   const id = parseInt(req.params.id);
-  const post = posts.find(p => p.id === id);
-  console.log(post)
+  const post = posts.find((p) => p.id === id);
+  console.log(post);
   if (!post) {
     return res.status(404).json({
-      error:"Not Found",
-      message:`Post withid ${id} not found`
-    })
+      error: "Not Found",
+      message: `Post withid ${id} not found`,
+    });
   }
-  const postIndex = post.indexOf(posts)
-  if (postIndex >-1) {
-    post.splice(post, 1)
+  const postIndex = posts.indexOf(post);
+  if (postIndex > -1) {
+    posts.splice(postIndex, 1);
   }
-  console.log(posts)
-  res.sendStatus(204)
+  console.log(posts);
+  res.sendStatus(204);
 });
 
 module.exports = router;
