@@ -15,4 +15,4 @@ app.get("/", (req, res) => {
 
 //*define posts router
 
-app.use("/api/posts", postsRouter);
+app.use("/posts", postsRouter);
