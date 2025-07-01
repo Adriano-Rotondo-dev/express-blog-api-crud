@@ -3,7 +3,16 @@ const posts = require("../data/posts");
 const router = express.Router();
 
 //TODO: INDEX
+//TODO BONUS - implementa un filtro di ricerca nell'index che mostri solo i post con un determinato tag
 router.get("/", (req, res) => {
+  //*creo una costante per il filtro
+
+  //*creo le condizioni del filtro
+
+  //* se la richiesta contiene un filtro, filtro il mio array
+
+
+  //* salvo il risultato nella variabile 
   console.log(req.params);
   res.json(posts);
 });
@@ -44,11 +53,10 @@ router.patch("/:id", (req, res) => {
 router.delete("/:id", (req, res) => {
   const id = parseInt(req.params.id);
   const post = posts.find((p) => p.id === id);
-  console.log(post);
   if (!post) {
     return res.status(404).json({
       error: "Not Found",
-      message: `Post withid ${id} not found`,
+      message: `Post with id ${id} not found`,
     });
   }
   const postIndex = posts.indexOf(post);
