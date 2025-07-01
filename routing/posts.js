@@ -1,67 +1,23 @@
 const express = require("express");
-const posts = require("../data/posts");
 const router = express.Router();
+const postController = require('../controllers/postController')
 
-//TODO: INDEX
-//TODO BONUS - implementa un filtro di ricerca nell'index che mostri solo i post con un determinato tag
-router.get("/", (req, res) => {
-let filteredPosts = posts
-if (req.query.tags) {
-  filteredPosts = posts.filter(
-    post => post.tags.includes(req.query.tags)
-  )
-}
-  res.json(filteredPosts);
-});
+//index
+router.get('/', postController.index)
 
-//TODO: SHOW
-router.get("/:id", (req, res) => {
-  const id = parseInt(req.params.id);
-  const post = posts.find((p) => p.id === id);
-  console.log(post);
-  if (!post) {
-    return res.status(404).json({
-      error: "Not Found",
-      message: "Post not found",
-    });
-  }
-  res.json(post);
-});
+//show
+router.get('/:id', postController.show)
 
-//TODO: STORE
-router.post("/", (req, res) => {
-  const id = req.params.id;
-  res.send(`Create a new post`);
-});
+//store
+router.post('/', postController.store)
 
-//TODO: UPDATE
-router.put("/:id", (req, res) => {
-  const id = req.params.id;
-  res.send(`Integral update of post with id: ${id}`);
-});
+//update
+router.put('/:id', postController.update)
 
-//TODO: MODIFY
-router.patch("/:id", (req, res) => {
-  const id = req.params.id;
-  res.send(`Partial modify of post with id: ${id}`);
-});
+//modify
+router.patch('/:id', postController.modify)
 
-//TODO: DESTROY
-router.delete("/:id", (req, res) => {
-  const id = parseInt(req.params.id);
-  const post = posts.find(p => p.id === id);
-  if (!post) {
-    return res.status(404).json({
-      error: "Not Found",
-      message: `Post with id ${id} not found`,
-    });
-  }
-  const postIndex = posts.indexOf(post);
-  if (postIndex > -1) {
-    posts.splice(postIndex, 1);
-  }
-  console.log(posts);
-  res.sendStatus(204);
-});
+//destroy
+router.delete('/:id', postController.destroy)
 
 module.exports = router;
