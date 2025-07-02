@@ -23,6 +23,7 @@ function show(req, res) {
 
 function store(req, res) {
   const id = req.params.id;
+  
   res.send(`Create a new post`);
 }
 
