@@ -22,9 +22,19 @@ function show(req, res) {
 }
 
 function store(req, res) {
-  const id = req.params.id;
-  
-  res.send(`Create a new post`);
+  //*Creiamo un nuovo oggetto post 
+const newId = posts[posts.length -1].id+1
+const newPost = {
+  id: newId, 
+  title: req.body.title,
+  content:req.body.content,
+  image: req.body.image,
+  tags: req.body.tags  
+}
+posts.push(newPost)
+  console.log(posts)
+  res.status(201)
+  res.json(newPost)
 }
 
 function update(req, res) {

@@ -14,5 +14,5 @@ app.get("/", (req, res) => {
 });
 
 //*define posts router
-
+app.use(express.json())
 app.use("/posts", postsRouter);
