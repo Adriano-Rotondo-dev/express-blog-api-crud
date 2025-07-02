@@ -13,6 +13,9 @@ app.get("/", (req, res) => {
   res.send("Wecolme to the POSTS API");
 });
 
+//* define app static assets
+app.use(express.static("public"));
+//*define app body-parser
+app.use(express.json());
 //*define posts router
-app.use(express.json())
 app.use("/posts", postsRouter);
